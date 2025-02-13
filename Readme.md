@@ -1,81 +1,85 @@
-# WeMatchSports
+# **WeMatchSports**
 
-## About the Project
+## **Overview**
+WeMatchSports is a Django-based monolithic web application designed to connect sports enthusiasts by enabling them to find nearby players, match based on skills, and communicate seamlessly. This platform allows users to:
+- Discover and join sport-specific public rooms for updates and discussions.
+- Match with players of similar skill levels.
+- Securely chat with connected partners to coordinate games.
 
-- For “WeMatchSports”, we have built a web application that helps people quickly find sports buddies nearby. Many people enjoy sports but often struggle to find others to play with due to busy schedules or last-minute changes. WeMatchSports solves this by connecting users with others who share similar sports interests.
-- The application allows users to:
-   - View sport specific Public Rooms so that people can access the latest news about that sport.
-   - Get matched with similar skilled players to find people with similar skill sets by just a click of a button
-   - Chat with Connected Partners securely to coordinate the game details and what not.
-- We have aimed to make it easy, secure, and fast for people to connect with other fellow players who want to play the same sports. The app also keeps user data private with encryption.
-- We have made it easier to discover sports by creating a responsive, safe, and user-friendly platform that facilitates communication. This allows for more impromptu, enjoyable sporting activities without requiring a predetermined group of buddies to be accessible, saving users time while meeting new people at the same time.
+The application is built for scalability, user privacy, and ease of use, with data security measures like encryption for sensitive information.
 
+---
 
-## Steps to run the code on docker container
-For Backend:
-- docker build .
-- docker run -p 8000:8000 <image_id>
+## **Architecture**
+WeMatchSports follows a modular, monolithic architecture with distinct Django apps for key functionalities:
+- **Authentication**: Handles user sign-up, login, session management, and CSRF protection.
+- **General**: Manages the user dashboard, profile settings, notifications, and public rooms.
+- **Matchmaking**: Matches users based on skill similarity using algorithms like cosine similarity.
+- **Messaging**: Provides an encrypted chat interface for secure communication.
 
-For Kafka:
-- docker compose up
+---
 
-## Steps to run the code without docker container
-- python manage.py runserver
-- bin/zookeeper-server-start.sh config/zookeeper.properties (Assuming that Kafka is added to the path)
-- bin/kafka-server-start.sh config/server.properties (Assuming that Kafka is added to the path)
+## **Setup and Deployment**
 
-## Microservices with snapshots
-### Authentication
-- Manages the authentication and authorization processes of the project.
-- Consists of sections like sign-up, login and logout.
-- Manages and stores temporary data in the form of user sessions.
-- Prevents unauthorized access to the service by redirecting users to the login section.
-- Leverages Django's inbuilt Cross-Site Resource Forgery (CSRF) protection mechansim by passing unique tokens with each API POST call.
+### **Run with Docker**
+1. Build the Docker image:
+   ```bash
+   docker build .
+   ```
+2. Run the container:
+   ```bash
+   docker run -p 8000:8000 <image_id>
+   ```
+3. Start Kafka services:
+   ```bash
+   docker compose up
+   ```
 
-#### Login
+### **Run without Docker**
+1. Start the Django development server:
+   ```bash
+   python manage.py runserver
+   ```
+2. Start Kafka services (ensure Kafka is installed and added to the PATH):
+   ```bash
+   bin/zookeeper-server-start.sh config/zookeeper.properties
+   bin/kafka-server-start.sh config/server.properties
+   ```
 
-![image](https://github.com/user-attachments/assets/b29361c2-c7e0-4b28-b38a-f972e0876e0d)   
+---
 
-#### Sign-Up
+## **Core Features by App**
 
-![image](https://github.com/user-attachments/assets/2932f2e4-5343-4509-adfa-bbdcd610feaa)   
+### **1. Authentication**
+- User sign-up, login, and logout functionalities.
+- Session management for temporary user data.
+- CSRF protection via Django's built-in mechanism.
 
-### General
-- Renders a customized dashboard for every user.
-- Handles general services like notification management and users connection management.
-- Allows users to make changes to their profiles.
-- Contains public rooms dedicated to various sport that users can view based on their interests.
-- Provides seamless interface for users to browse through a list of similar profiles.
+### **2. General**
+- Personalized user dashboard and profile management.
+- Notification and connection management.
+- Sport-specific public rooms for discussions and updates.
 
-#### Dashboard
+### **3. Matchmaking**
+- Suggests players with similar skills using cosine similarity algorithms.
+- Easy connect requests for matched players.
 
-![image](https://github.com/user-attachments/assets/2398f8fc-7095-41b3-91f7-3a2d0ce5e7d2)   
+### **4. Messaging**
+- Secure, encrypted chat functionality.
+- Messages stored in the database with chat history retrieval.
 
-#### User Profile
+---
 
-![image](https://github.com/user-attachments/assets/91a57ae5-296f-44df-ae69-29aa8e1f145a)   
+## **Technology Stack**
+- **Backend**: Django, Django REST Framework
+- **Database**: SQLite (development), PostgreSQL (production-ready configuration)
+- **Messaging**: Apache Kafka
+- **Containerization**: Docker, Docker Compose
 
-#### Public Rooms
+---
 
-![image](https://github.com/user-attachments/assets/4afbdf1c-d284-4654-aac6-a5021b78de3b)   
-
-#### Public Rooms - Tennis
-
-![image](https://github.com/user-attachments/assets/c4aa5035-3404-44ac-a800-959f1b765b18)   
-
-### Matchmaking
-- Allows users to view a list of players with similar skills by clicking a button.
-- Utilizes a cosine similarity algorithm in the backend to identify players with matching skill sets.
-- Displays the list of similar skilled players with an option to send a connect request via a dedicated button.
-
-#### Find Matched Players
-![image](https://github.com/user-attachments/assets/d95470c9-899c-4a0e-aefe-90b62a554abe)
-
-
-### Messaging
-- Displays a messaging user interface for the user with its connections.
-- Stores the messages in an encrypted in the database.
-- Messages are saved in the chat history.
-
-#### All chats per connection
-![image](https://github.com/user-attachments/assets/ca667701-bd1e-4d29-b99d-b7f7ff8700af)
+## **Contributing**
+Contributions are welcome. To contribute:
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Submit a pull request with detailed changes.
