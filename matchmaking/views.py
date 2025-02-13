@@ -25,7 +25,7 @@ def find_matched_players(current_user, players, threshold=0.1):
         threshold (float): Minimum cosine similarity to consider a match.
         
     Returns:
-        list: List of matched players.
+        list: List of matched players. (Cosine similarity)
     """
 
     matched_players = []
