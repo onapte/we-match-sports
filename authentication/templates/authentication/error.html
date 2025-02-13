@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+        }
+
+        /* Error container */
+        .error-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 400px; /* Increased width */
+            text-align: center;
+        }
+
+        .error-container h1 {
+            margin-bottom: 1.5rem;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        /* Footer styling */
+        .error-container .footer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem; /* Spacing between links */
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .error-container .footer a {
+            color: #29ab93;
+            text-decoration: none;
+        }
+
+        .error-container .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>{{ message }}</h1>
+        <div class="footer">
+            <p><a href="/login">Go back to Login</a></p>
+            <p><a href="/signup">Sign Up</a></p>
+        </div>
+    </div>
+</body>
+</html>

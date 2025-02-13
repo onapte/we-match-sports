@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ room_name | title }}</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0 2rem;
+        }
+
+        /* Container for all content */
+        .dashboard-container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        /* Header Section */
+        .news-section h2:first-of-type {
+            font-size: 2rem;
+            color: #009688;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* News Section */
+        .news-section {
+            margin-top: 2rem;
+        }
+
+        .news-section h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .news-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .news-section li {
+            background-color: #ffffff;
+            margin: 10px 0;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .news-section li:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-section li h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-section li h3 a {
+            color: #52b4a2;
+            text-decoration: none;
+        }
+
+        .news-section li h3 a:hover {
+            text-decoration: underline;
+        }
+
+        .news-section li p {
+            color: #777;
+        }
+
+        /* Footer Section */
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .footer a {
+            color: #52b4a2;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- News Section -->
+        <div class="news-section">
+            <h2>{{ room_name | upper }}</h2>
+            <h2>Latest News</h2>
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        <h3><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+                        <p>{{ article.publishedAt | date:"F d, Y" }}</p>
+                    </li>
+                {% empty %}
+                    <li>No articles found</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>Back to Public Rooms <a href="{% url 'general:public_rooms' %}">Here</a></p>
+        </div>
+    </div>
+</body>
+</html>

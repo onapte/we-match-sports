@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Rooms</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0 2rem;
+        }
+
+        /* Container for all content */
+        .dashboard-container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Back Button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: #fff;
+            background-color: #74ebd5;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s ease-in-out;
+        }
+
+        .back-button:hover {
+            background-color: #5fc0b5;
+            transform: translateY(-2px);
+        }
+
+        /* Public Rooms Section */
+        .public-rooms {
+            margin-top: 2rem;
+        }
+
+        .public-rooms h2 {
+            font-size: 1.8rem;
+            color: #2a4365;
+            margin-bottom: 1rem;
+        }
+
+        .public-rooms ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .public-rooms li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e6f7f9;
+            margin: 10px 0;
+            padding: 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .public-rooms li:hover {
+            transform: translateY(-5px);
+        }
+
+        .public-rooms li h3 {
+            font-size: 1.2rem;
+            color: #2a4365;
+            margin-left: 1rem;
+        }
+
+        .public-rooms li a {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: #fff;
+            background-color: #74ebd5;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .public-rooms li a:hover {
+            background-color: #5fc0b5;
+        }
+
+        /* Footer Section */
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .footer a {
+            color: #74ebd5;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Back Button -->
+        <a href="{% url 'general:dashboard' %}" class="back-button">Back to Dashboard</a>
+        
+        <!-- Public Rooms List -->
+        <div class="public-rooms">
+            <h2>Available Public Rooms:</h2>
+            <ul>
+                {% for room in rooms %}
+                    <li>
+                        <h3>{{ room.name }}</h3>
+                        <a href="{% url 'general:room_detail' room_name=room.name|slugify %}">View</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>Back to Dashboard <a href="{% url 'general:dashboard' %}">Here</a></p>
+        </div>
+    </div>
+</body>
+</html>

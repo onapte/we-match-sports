@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .details {
+            margin-bottom: 15px;
+        }
+
+        .details label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .details span {
+            display: block;
+            margin-top: 5px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            display: none; /* Hidden initially */
+        }
+
+        label {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input:disabled {
+            background-color: #e9ecef;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .edit-button {
+            text-align: center;
+        }
+    </style>
+    <script>
+        function toggleEditMode() {
+            const details = document.querySelector('.details');
+            const form = document.querySelector('form');
+            const editButton = document.getElementById('editProfileButton');
+
+            if (form.style.display === 'none') {
+                // Switch to edit mode
+                details.style.display = 'none';
+                form.style.display = 'flex';
+                editButton.textContent = 'Cancel';
+            } else {
+                // Switch to view mode
+                details.style.display = 'block';
+                form.style.display = 'none';
+                editButton.textContent = 'Edit Profile';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>User Profile</h2>
+
+        <!-- Display Mode -->
+        <div class="details">
+            <label>Email:</label>
+            <span>{{ email }}</span>
+
+            <label>First Name:</label>
+            <span>{{ first_name }}</span>
+
+            <label>Last Name:</label>
+            <span>{{ last_name }}</span>
+
+            <label>Age:</label>
+            <span>{{ age }}</span>
+
+            <label>City:</label>
+            <span>{{ city }}</span>
+
+            <label>Country:</label>
+            <span>{{ country }}</span>
+
+            <label>Favorite Game 1:</label>
+            <span>{{ game_1 }}</span>
+
+            <label>Favorite Game 2:</label>
+            <span>{{ game_2 }}</span>
+        </div>
+
+        <!-- Edit Mode -->
+        <form method="POST">
+            {% csrf_token %}
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ email }}" disabled>
+
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ first_name }}" required>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ last_name }}" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" value="{{ age }}" required>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" value="{{ city }}" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" value="{{ country }}" required>
+
+            <label for="game_1">Favorite Game 1:</label>
+            <input type="text" id="game_1" name="game_1" value="{{ game_1 }}" required>
+
+            <label for="game_2">Favorite Game 2:</label>
+            <input type="text" id="game_2" name="game_2" value="{{ game_2 }}" required>
+
+            <button type="submit" name="update_profile">Update Profile</button>
+        </form>
+
+        <!-- Edit Profile Button -->
+        <div class="edit-button">
+            <button id="editProfileButton" onclick="toggleEditMode()">Edit Profile</button>
+            <button id="editProfileButton" onclick="window.location.href='/dashboard'">Back to Dashboard</button>
+        </div>
+    </div>
+</body>
+</html>

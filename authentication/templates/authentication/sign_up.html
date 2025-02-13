@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+        }
+
+        /* Form container */
+        .signup-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+
+        .signup-container h1 {
+            margin-bottom: 1.5rem;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        /* Input fields */
+        .form-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .form-group input:focus {
+            border-color: #74ebd5;
+            outline: none;
+        }
+
+        /* Full-width inputs */
+        .full-width input {
+            width: 100%;
+        }
+
+        /* Button styling */
+        .signup-container button {
+            background: #74ebd5;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .signup-container button:hover {
+            background: #5DC5BC;
+        }
+
+        /* Footer text */
+        .signup-container .footer {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .signup-container .footer a {
+            color: #74ebd5;
+            text-decoration: none;
+        }
+
+        .signup-container .footer a:hover {
+            text-decoration: underline;
+        }
+
+    select {
+        width: 100%;
+        padding: 0.8rem;
+        padding-right: 2rem; /* Space for the arrow */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        color: #555;
+        background-color: #fff;
+        appearance: none;
+        cursor: pointer;
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23555"><path d="M7 10l5 5 5-5z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1rem;
+    }
+
+    select:focus {
+        border-color: #74ebd5;
+        outline: none;
+        box-shadow: 0 0 5px rgba(116, 235, 213, 0.5);
+    }
+
+    select option {
+        font-size: 1rem;
+        color: #333;
+    }
+
+    /* Dropdown container for better layout */
+    .dropdown-container {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    /* Improved spacing for dropdowns */
+    .form-group select {
+        margin-top: 0.5rem;
+    }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group full-width">
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="fname" placeholder="First Name" required>
+                <input type="text" name="lname" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="city" placeholder="City" required>
+                <input type="text" name="country" placeholder="Country" required>
+            </div>
+            <div class="form-group">
+                <input type="number" name="age" placeholder="Age" required>
+            </div>
+            <div class="form-group">
+                <select id="game1" name="game_1" required>
+                    <option value="" disabled selected>Game Choice 1</option>
+                    <option value="Cricket">Cricket</option>
+                    <option value="Football">Football</option>
+                    <option value="Basketball">Basketball</option>
+                    <option value="Tennis">Tennis</option>
+                    <option value="Hockey">Hockey</option>
+                </select>
+                <select id="game2" name="game_2" required>
+                    <option value="" disabled selected>Game Choice 2</option>
+                    <option value="Cricket">Cricket</option>
+                    <option value="Football">Football</option>
+                    <option value="Basketball">Basketball</option>
+                    <option value="Tennis">Tennis</option>
+                    <option value="Hockey">Hockey</option>
+                </select>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="footer">
+            <p>Already have an account? <a href="/login">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        const game1Dropdown = document.getElementById('game1');
+        const game2Dropdown = document.getElementById('game2');
+
+        game1Dropdown.addEventListener('change', () => {
+            const selectedGame = game1Dropdown.value;
+
+            // Reset game2 dropdown
+            [...game2Dropdown.options].forEach(option => {
+                option.disabled = false;
+            });
+
+            // Disable the selected option in game2
+            [...game2Dropdown.options].forEach(option => {
+                if (option.value === selectedGame) {
+                    option.disabled = true;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
