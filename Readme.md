@@ -1,7 +1,7 @@
 # **WeMatchSports**
 
 ## **Overview**
-WeMatchSports is a Django-based monolithic web application designed to connect sports enthusiasts by enabling them to find nearby players, match based on skills, and communicate seamlessly. This platform allows users to:
+WeMatchSports is a Django-based monolithic application designed to connect sports enthusiasts by enabling them to find nearby players, match based on skills, and communicate seamlessly. This platform allows users to:
 - Discover and join sport-specific public rooms for updates and discussions.
 - Match with players of similar skill levels.
 - Securely chat with connected partners to coordinate games.
